@@ -1,0 +1,294 @@
+@import "tailwindcss";
+
+@theme {
+  --color-receipt-bg: #f4ecd8;
+  --color-receipt-border: #1a1a1a;
+  --color-cream: #e8dfc8;
+  --color-charcoal: #1a1a1a;
+  --color-muted: #6b6b6b;
+  --color-accent: #c9a96e;
+  --color-soft-pink: #f0e8e0;
+  --font-mono: 'Share Tech Mono', monospace;
+  --font-pixel: 'Press Start 2P', monospace;
+  --font-pixel-soft: 'Silkscreen', monospace;
+  --font-sans: 'Space Grotesk', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #e8dfc8;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.app-root {
+  min-height: 100vh;
+  width: 100%;
+}
+
+.font-receipt {
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.font-pixel {
+  font-family: 'Press Start 2P', monospace;
+  letter-spacing: 0.02em;
+}
+
+.font-pixel-soft {
+  font-family: 'Silkscreen', monospace;
+  font-weight: 700;
+}
+
+.font-sans-app {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-16px); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes scanline {
+  0% { top: 0%; }
+  100% { top: 100%; }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-ticker {
+  animation: ticker 20s linear infinite;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+
+.receipt-zigzag-top {
+  background:
+    linear-gradient(135deg, #f4ecd8 33.33%, transparent 33.33%) 0 0,
+    linear-gradient(225deg, #f4ecd8 33.33%, transparent 33.33%) 0 0;
+  background-size: 14px 14px;
+  background-color: #1a1a1a;
+  height: 14px;
+  width: 100%;
+}
+
+.receipt-zigzag-bottom {
+  background:
+    linear-gradient(315deg, #f4ecd8 33.33%, transparent 33.33%) 0 0,
+    linear-gradient(45deg, #f4ecd8 33.33%, transparent 33.33%) 0 0;
+  background-size: 14px 14px;
+  background-color: #1a1a1a;
+  height: 14px;
+  width: 100%;
+}
+
+/* Parchment texture for the receipt paper */
+.receipt-paper {
+  background-color: #f4ecd8;
+  position: relative;
+  background-image:
+    radial-gradient(ellipse at 20% 10%, rgba(180, 150, 100, 0.10) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 30%, rgba(160, 130, 80, 0.08) 0%, transparent 45%),
+    radial-gradient(ellipse at 30% 70%, rgba(140, 110, 70, 0.07) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 90%, rgba(180, 150, 100, 0.09) 0%, transparent 45%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(120, 90, 50, 0.025) 0px,
+      rgba(120, 90, 50, 0.025) 1px,
+      transparent 1px,
+      transparent 3px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(120, 90, 50, 0.02) 0px,
+      rgba(120, 90, 50, 0.02) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+}
+
+.receipt-paper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.4;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.4 0 0 0 0 0.3 0 0 0 0 0.15 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  mix-blend-mode: multiply;
+}
+
+.receipt-paper > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* === Audit dashboard panels (parchment cards) === */
+.audit-panel {
+  background-color: #f4ecd8;
+  border: 2px solid #1a1a1a;
+  box-shadow: 4px 4px 0 rgba(26,26,26,0.85);
+  position: relative;
+  background-image:
+    radial-gradient(ellipse at 15% 10%, rgba(180, 150, 100, 0.12) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 90%, rgba(140, 110, 70, 0.10) 0%, transparent 55%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(120, 90, 50, 0.025) 0px,
+      rgba(120, 90, 50, 0.025) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+}
+
+.audit-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='an'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.4 0 0 0 0 0.3 0 0 0 0 0.15 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23an)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  mix-blend-mode: multiply;
+}
+
+.audit-panel > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Parchment page background */
+.parchment-bg {
+  background-color: #e8dfc8;
+  background-image:
+    radial-gradient(ellipse at 0% 0%, rgba(180, 150, 100, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 100% 100%, rgba(160, 120, 70, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(140, 100, 60, 0.05) 0%, transparent 70%);
+}
+
+.parchment-bg::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n2'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.25 0 0 0 0 0.1 0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n2)'/%3E%3C/svg%3E");
+  background-size: 240px 240px;
+  mix-blend-mode: multiply;
+  z-index: 0;
+}
+
+.progress-bar-fill {
+  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-primary {
+  background-color: #1a1a1a;
+  color: #f4ecd8;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 16px 36px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.btn-primary:hover {
+  background-color: #333;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: #1a1a1a;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 16px 36px;
+  border: 2px solid #1a1a1a;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.btn-secondary:hover {
+  background-color: #1a1a1a;
+  color: #f4ecd8;
+}
+
+.option-btn {
+  background: transparent;
+  border: 1.5px solid #b8a988;
+  padding: 14px 20px;
+  text-align: left;
+  cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  color: #1a1a1a;
+  transition: all 0.18s ease;
+  width: 100%;
+}
+
+.option-btn:hover {
+  border-color: #1a1a1a;
+  background: rgba(26,26,26,0.04);
+}
+
+.option-btn.selected {
+  background: #1a1a1a;
+  color: #f4ecd8;
+  border-color: #1a1a1a;
+}
+
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+}
+
+/* Pixel-art header SVG holder */
+.pixel-header-svg {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  shape-rendering: crispEdges;
+}
