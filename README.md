@@ -26,6 +26,12 @@
 Answer **12 brutally honest multiple-choice questions** about your screen time, ghosting tendencies, impulse purchases, and sleep deprivation. In return, you get a **shareable, pixel-art-adorned audit report** that belongs on your Instagram Stories immediately.
 
 No login. No data collected. 100% vibes.
+<img width="1512" height="945" alt="image" src="https://github.com/user-attachments/assets/a9303e66-d744-4478-9caf-4690bfa0ba37" />
+
+<img width="1512" height="945" alt="image" src="https://github.com/user-attachments/assets/4aa0b6c2-d3a3-48aa-a240-4054232eeb63" />
+
+<img width="1512" height="945" alt="image" src="https://github.com/user-attachments/assets/6f8ef3e7-26a9-4b25-b6ca-5a616c59d809" />
+
 
 ---
 
